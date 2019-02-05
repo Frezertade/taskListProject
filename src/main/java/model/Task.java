@@ -1,13 +1,19 @@
 package model;
 
+import util.Category;
+import util.Priority;
+
 public class Task {
 
     private int id;
     private String task;
     private String dueDate;
-    private String category;
+    private Category category;
+    private Priority priority;
+    private User createdBy;
+    private Team team;
 
-    public Task(int id, String task, String dueDate, String category) {
+    public Task(int id, String task, String dueDate, Category category) {
         this.id = id;
         this.task = task;
         this.dueDate = dueDate;
@@ -38,11 +44,35 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
