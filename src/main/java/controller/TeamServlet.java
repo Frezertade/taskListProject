@@ -34,5 +34,4 @@ public class TeamServlet extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             out.write(JSONteams);
         }
-
 }
