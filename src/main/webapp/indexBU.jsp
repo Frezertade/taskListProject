@@ -17,11 +17,11 @@
 <form action="login" method="post">
     <div class="form-group">
         <label for="user">Username:</label>
-        <input type="email"  class="form-control" id="user" required="required">
+        <input name="username" type="email"  class="form-control" placeholder="Username" id="user" required="required" value="${username}">
     </div>
     <div>
         <label for="pass">Password:</label>
-        <input type="password" id="pass" class="form-control" required="required">
+        <input name="password" type="password" id="pass" class="form-control" placeholder="*******" required="required" value="${password}">
     </div>
     <div style="display: ${error != null && error == true ? 'block':'none'}" class="alert alert-danger" >
         <Strong>ERROR!</Strong> ${errorMessage != null ? errorMessage : ''}
