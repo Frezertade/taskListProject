@@ -13,7 +13,7 @@ tasksController = function() {
 	 * 111917kl
      */
 	function retrieveTasksServer() {
-        $.ajax("TaskServlet", {
+        $.ajax("tasks", {
             "type": "get",
 			dataType: "json"
             // "data": {

@@ -22,7 +22,9 @@ public class TeamMemberSetvice {
     }
     public List<TeamMember> findByTeam(Team team){
         return findAll().stream()
-                .filter(teamMember -> teamMember.getTeamId().getTeamId() == team.getTeamId())
+                .filter(teamMember -> {
+                    return ((teamMember.getTeamId() != null && team != null) && teamMember.getTeamId().getTeamId() == team.getTeamId()); // filter Team Member by team to get team Users
+                })
                 .collect(Collectors.toList());
     }
 

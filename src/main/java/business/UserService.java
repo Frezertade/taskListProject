@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -66,5 +67,12 @@ public class UserService {
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(JSONUser);
 
+    }
+
+    public User findByUserId(int userid){
+        Optional<User> user= findAll().stream()
+                .filter(user1 -> user1.getUserID()== userid)
+                .findAny();
+        return user.orElse(null);
     }
 }
