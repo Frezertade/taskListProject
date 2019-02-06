@@ -13,13 +13,14 @@ public class Task {
     private User createdBy;
     private Team team;
 
-    public Task(int id, String task, String dueDate, Category category ,Priority priority ,User createdBy) {
+    public Task(int id, String task, String dueDate, Category category ,Priority priority ,User createdBy,Team team) {
         this.id = id;
         this.task = task;
         this.dueDate = dueDate;
         this.category = category;
         this.priority = priority;
         this.createdBy = createdBy;
+        this.team=team;
     }
 
     public int getId() {
