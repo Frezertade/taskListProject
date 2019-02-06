@@ -14,7 +14,7 @@ public class Database<T> {
        tables = new HashMap<>();
     }
 
-    public static Database getInstance(){
+    public static<T> Database<T> getInstance(){
         if(single_instance == null){
             single_instance = new Database();
         }
@@ -26,6 +26,7 @@ public class Database<T> {
         List<T> values= getValue(name);
         if(values== null) values= new ArrayList<>();
         values.add(value);
+        tables.put(name,values);
     }
 
     public List<T> getValue(DBName name){
