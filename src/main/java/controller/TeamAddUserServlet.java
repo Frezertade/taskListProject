@@ -37,7 +37,7 @@ public class TeamAddUserServlet extends HttpServlet {
             Optional user = users.stream().filter(user1 -> user1.getUserID()==userId).findFirst();
             Optional team = teams.stream().filter(team1 -> team1.getTeamId()==teamId).findFirst();
             if (user.isPresent()&&team.isPresent()) {
-                dbTeamMemeber.setValue(DBName.TEAM_MEMBER, new TeamMember(dbTeam.getValue(DBName.TEAM).get(1),dbUser.getValue(DBName.USER).get(1));
+                dbTeamMemeber.setValue(DBName.TEAM_MEMBER, new TeamMember(dbTeam.getValue(DBName.TEAM).get(1),dbUser.getValue(DBName.USER).get(1)));
             }
 
 
