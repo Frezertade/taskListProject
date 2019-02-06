@@ -5,6 +5,7 @@ import model.Team;
 import model.User;
 import utility.Database;
 import util.DBName;
+import business.TeamService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,19 +24,10 @@ public class TeamServlet extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             PrintWriter out = response.getWriter();
 
-            Database<User> dbUser = Database.getInstance();
-            Database<Team> dbTeam = Database.getInstance();
-
-            //adds users to the database
-            dbUser.setValue(DBName.USER, new User(1,"FREZER","TADESSE","FREE@mum.edu","432-234-2345","fairfield,iowa,52557","password"));
-            dbUser.setValue(DBName.USER, new User(2,"Gebere","MANOFTHEYEAR","GEREe@mum.edu","510-234-2345","fairfield,iowa,52557","password") );
-            //adds team to the databse
-            dbTeam.setValue(DBName.TEAM,new Team(1,"Programers",dbUser.getValue(DBName.USER).get(0)));
-            dbTeam.setValue(DBName.TEAM,new Team(2,"Programers",dbUser.getValue(DBName.USER).get(1)));
-
            //respondes the given data to the caller
+            TeamService teamServe = new TeamService();
             String JSONteams;
-            List<Team> teamList = dbTeam.getValue(DBName.TEAM);
+            List<Team> teamList = teamServe.teams();
             JSONteams = new Gson().toJson(teamList);
 
             response.setContentType("application/json");
