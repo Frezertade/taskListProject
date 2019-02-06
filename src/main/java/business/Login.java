@@ -14,15 +14,17 @@ public class Login {
         List<User> users= database.getValue(DBName.USER);
         if(users == null) return false;
         else {
+            // search for any much with the provided email and password
           return users.stream().anyMatch(user ->
                   (user.getEmail().equals(username) && user.getPassword().equals(password))
             );
         }
     }
+    // find the user using email address (username)
     public static User findUserByEmail(String email){
         List<User> users= database.getValue(DBName.USER);
-        Optional<User> user= users.stream().filter(user1 -> user1.getEmail().equals(email)).findAny();
-        return user.orElse(null);
+        Optional<User> user= users.stream().filter(user1 -> user1.getEmail().equals(email)).findAny(); // filter the list to find the user with the provided email address
+        return user.orElse(null); // return the user if exits or return null if not exits
     }
 
     public static void addStaticUser(){
