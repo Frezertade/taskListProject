@@ -44,6 +44,7 @@ tasksController = function() {
 	
 	function renderTable() {
 		$.each($(taskPage).find('#tblTasks tbody tr'), function(idx, row) {
+
 			var due = Date.parse($(row).find('[datetime]').text());
 			if (due.compareTo(Date.today()) < 0) {
 				$(row).addClass("overdue");
@@ -152,7 +153,14 @@ tasksController = function() {
 			$(taskPage).find('#tblTasks tbody').empty();
 			storageEngine.findAll('task', function(tasks) {
 				tasks.sort(function(o1, o2) {
-					return Date.parse(o1.requiredBy).compareTo(Date.parse(o2.requiredBy));
+					//return Date.parse(o1.requiredBy).compareTo(Date.parse(o2.requiredBy));
+
+					//I changed from sorting due date  to priority by sort to the new added
+					if(o1.priority>o2.priority) return 1;
+					else if(o1.priority<o2.priority) return -1;
+					else return 0;
+                  //  return ((o1.priority)>(o2.priority))? 1 :((o1.priority)<(o2.priority))? -1:0;
+
 				});
 				$.each(tasks, function(index, task) {
 					if (!task.complete) {
