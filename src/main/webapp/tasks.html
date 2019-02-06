@@ -23,6 +23,15 @@
 				<label>Task</label> <input type="text" required="required"
 					name="task" class="large" placeholder="Breakfast at Tiffanys" maxlength="200"  />
 			</div>
+			<!-- The Priority ratings that is added to the task table  -->
+			<div>
+				<label>Priority</label> <select name="priority">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+			</select>
+			</div>
 			<div>
 				<label>Required by</label> <input type="date" required="required"
 					name="requiredBy" />
@@ -42,17 +51,20 @@
 	<section>
 		<table id="tblTasks">
 			<colgroup>
-				<col width="40%">
-				<col width="15%">
-				<col width="15%">
 				<col width="30%">
+				<col width="15%">
+				<col width="15%">
+				<col width="20%">
+				<col width="20%">
 			</colgroup>
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Due</th>
 					<th>Category</th>
+					<th>Priority</th>
 					<th>Actions</th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -64,7 +76,7 @@
 		</nav>
 	</section>
 	</main>
-	<footer>You have <span id="taskCount"></span> tasks</footer>
+	<footer>You have <span id="taskCount"></span>tasks</footer>
 </body>
 <script>
 function initScreen() {
@@ -100,6 +112,7 @@ if (window.indexedDB) {
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${task}</td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}><time datetime="${requiredBy}">${requiredBy}</time></td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${category}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${priority}</td>
 	<td>
 		<nav>
 			{{if complete != true}}			
