@@ -3,9 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import model.Team;
 import model.User;
-import model.TeamMember;
 import utility.Database;
-import utility.MockData;
 import util.DBName;
 
 import javax.servlet.ServletException;
@@ -28,14 +26,14 @@ public class TeamServlet extends HttpServlet {
             Database<User> dbUser = Database.getInstance();
             Database<Team> dbTeam = Database.getInstance();
 
-
+            //adds users to the database
             dbUser.setValue(DBName.USER, new User(1,"FREZER","TADESSE","FREE@mum.edu","432-234-2345","fairfield,iowa,52557","password"));
             dbUser.setValue(DBName.USER, new User(2,"Gebere","MANOFTHEYEAR","GEREe@mum.edu","510-234-2345","fairfield,iowa,52557","password") );
-
+            //adds team to the databse
             dbTeam.setValue(DBName.TEAM,new Team(1,"Programers",dbUser.getValue(DBName.USER).get(0)));
-            dbTeam.setValue(DBName.TEAM,new Team(1,"Programers",dbUser.getValue(DBName.USER).get(1)));
+            dbTeam.setValue(DBName.TEAM,new Team(2,"Programers",dbUser.getValue(DBName.USER).get(1)));
 
-
+           //respondes the given data to the caller
             String JSONteams;
             List<Team> teamList = dbTeam.getValue(DBName.TEAM);
             JSONteams = new Gson().toJson(teamList);
