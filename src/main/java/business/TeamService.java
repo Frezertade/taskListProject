@@ -61,11 +61,13 @@ public class TeamService {
 
     //RETURNS LIST OF USERS FROM TEAMMEMBERS DATABSE
 
-    public List<User> getTeamUsers(int id){
-//        return new ArrayList<>() = teamMemberList.stream().filter(team -> team.getTeamId()==(id))
-//                .map(teamMember -> teamMember.getUserId()).map(userid -> {users.stream().filter(user -> user.getUserID()==userid.getUserID()).findFirst().get();});
-        return null;
-    }
+//    public List<User> getTeamUsers(int teamId){
+//        List<User> usersList =
+//       return null;
+//    }
+
+
+
 
 }
 
