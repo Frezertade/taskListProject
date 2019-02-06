@@ -23,7 +23,7 @@ public class Database<T> {
     }
 
     public void setValue(DBName name, T value){
-        List<T> values= tables.get(name);
+        List<T> values= getValue(name);
         if(values== null) values= new ArrayList<>();
         values.add(value);
     }
