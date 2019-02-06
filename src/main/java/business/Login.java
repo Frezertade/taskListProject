@@ -29,8 +29,8 @@ public class Login {
 
     public static void addStaticUser(){
         database.setValue(DBName.USER,new User(100,"Michael", "Berhanu","mikesol@gmail.com","319 616 0107","1000 N 4th St. fairfield, iowa ", "mikesol"));
-        database.setValue(DBName.USER,new User(100,"Frezer", "Tadesse","fire@gmail.com","319 616 0107","1000 N 4th St. fairfield, iowa ", "fire"));
-        database.setValue(DBName.USER,new User(100,"Gebreslassie", "Kahasay","gebre@gmail.com","319 616 0107","1000 N 4th St. fairfield, iowa ", "gebre"));
+        database.setValue(DBName.USER,new User(101,"Frezer", "Tadesse","fire@gmail.com","319 616 0107","1000 N 4th St. fairfield, iowa ", "fire"));
+        database.setValue(DBName.USER,new User(102,"Gebreslassie", "Kahasay","gebre@gmail.com","319 616 0107","1000 N 4th St. fairfield, iowa ", "gebre"));
     }
 
 }

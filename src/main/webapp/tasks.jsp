@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=utf-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +12,7 @@
 <script src="resources/scripts/jquery-serialization.js"></script>
 <script src="resources/scripts/tasks-controller.js"></script>
 <script src="resources/scripts/date.js"></script>
+<script src="resources/scripts/loadTable.js"></script>
 </head>
 <body>
 	<header>
@@ -19,27 +22,34 @@
 	<section id="taskCreation" class="not">
 		<form id="taskForm">
 			<input type="hidden" name="id"/>
-			<div>
-				<label>Task</label> <input type="text" required="required"
-					name="task" class="large" placeholder="Breakfast at Tiffanys" maxlength="200"  />
+			<div class="form-group">
+				<label>Task</label>
+				<input type="text" required="required"
+					name="task" class="large form-control" placeholder="Breakfast at Tiffanys" maxlength="200"  />
 			</div>
 			<!-- The Priority ratings that is added to the task table  -->
-			<div>
-				<label>Priority</label> <select name="priority">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
+			<div class="form-group">
+				<label>Priority</label> <select name="priority" class="form-control">
+				<option value="1">Urgent</option>
+				<option value="2">High</option>
+				<option value="3">Medium</option>
+				<option value="4">Low</option>
 			</select>
 			</div>
-			<div>
-				<label>Required by</label> <input type="date" required="required"
-					name="requiredBy" />
+			<div class="form-group">
+				<label>Required by</label> <input   type="date" required="required"
+					name="requiredBy" class="form-control" />
 			</div>
-			<div>
-				<label>Category</label> <select name="category">
+			<div class="form-group">
+				<label>Category</label> <select name="category" class="from-control">
 					<option value="Personal">Personal</option>
 					<option value="Work">Work</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Fot Team</label>
+				<select class="form-control">
+					<c:forEach var="team"
 				</select>
 			</div>
 			<nav>
@@ -78,36 +88,11 @@
 	</main>
 	<footer>You have <span id="taskCount"></span>tasks</footer>
 </body>
-<script>
-function initScreen() {
-	$(document).ready(function() {
-		tasksController.init($('#taskPage'), function() {
-			tasksController.loadTasks();
-		});		
-	});
-}
-if (window.indexedDB) { 
-	console.log("using indexedDB 111917kl");
-	$.getScript( "resources/scripts/tasks-indexeddb.js" )
-	.done(function( script, textStatus ) {
-		initScreen();
-	})
-	.fail(function( jqxhr, settings, exception ) {
-		console.log( 'Failed to load indexed db script' );
-	});
-} else if (window.localStorage) {
-	console.log("using webstorage 111917kl");
-	$.getScript( "resources/scripts/tasks-webstorage.js" )
-	.done(function( script, textStatus ) {
-		initScreen();
-	})
-	.fail(function( jqxhr, settings, exception ) {
-		console.log( 'Failed to load web storage script' );
-	});
-}
-</script>
+<div id="taskRow">
 
-<script id="taskRow" type="text/x-jQuery-tmpl">
+</div>
+
+<%--<script id="taskRow" type="text/x-jQuery-tmpl">
 <tr>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${task}</td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}><time datetime="${requiredBy}">${requiredBy}</time></td>
@@ -123,7 +108,7 @@ if (window.indexedDB) {
 		</nav>
 	</td>
 </tr>
-</script>
+</script>--%>
 
 
 </html>

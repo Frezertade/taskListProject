@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
             HttpSession session= req.getSession(); // get the session if exit if don't exit create one
             User user= Login.findUserByEmail(username); // get the user by using email(username)
             if(user != null)session.setAttribute("user",user);
-            req.getRequestDispatcher("tasks.html").forward(req,resp); // forward the request to the task html
+            req.getRequestDispatcher("tasks.jsp").forward(req,resp); // forward the request to the task html
         }
         if(error) {
             req.setAttribute("username",username);

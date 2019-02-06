@@ -1,11 +1,14 @@
 package business;
 
+import com.google.gson.Gson;
 import model.Task;
 import model.User;
 import util.DBName;
 import utility.Database;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -22,15 +25,15 @@ public class UserService {
         String lastName=req.getParameter("lastName");
         String email= req.getParameter("email");
         String phone= req.getParameter("phone");
-        String loction= req.getParameter("location");
+        String location= req.getParameter("location");
         String password=req.getParameter("password");
 
-        return new User(getRandomId(),firstName,lastName,email,phone,loction,password);
+        return new User(getRandomId(),firstName,lastName,email,phone,location,password);
 
 
     }
 
-    private int getRandomId(){
+    public int getRandomId(){
         Random random = new Random();
         return random.nextInt(1000);
     }
@@ -54,5 +57,14 @@ public class UserService {
         return findAll().stream()
                 .filter(user -> user.getLocation().equals(location))
                 .collect(Collectors.toList());
+    }
+
+    public void sendUserList(HttpServletResponse resp) throws IOException {
+        String JSONUser= new Gson().toJson(findAll());
+
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(JSONUser);
+
     }
 }

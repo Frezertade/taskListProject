@@ -34,8 +34,7 @@ public class TaskService {
 
         // create new task based on the input data;
         Category category1= Category.valueOf(category.toUpperCase());
-        TeamService teamService= new TeamService();
-        return new Task(getRandomId(),name,dueDate,category1, Priority.valueOf(priority.toUpperCase()),user,category1.equals(Category.PERSONAL)? null: teamService.findById(Integer.parseInt(team)));
+        return new Task(getRandomId(),name,dueDate,category1, Priority.valueOf(priority.toUpperCase()),user,category1.equals(Category.PERSONAL)? null: getTeamById(team));
 
     }
 
@@ -86,5 +85,16 @@ public class TaskService {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(JSONTask);
+    }
+
+    private Team getTeamById(String team){
+       int teamId;
+        try {
+            teamId=Integer.parseInt(team);
+            return new TeamService().findById(teamId);
+        }catch (NumberFormatException ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
 }
