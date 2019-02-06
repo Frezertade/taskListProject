@@ -152,6 +152,7 @@ tasksController = function() {
 		loadTasks : function() {
 			$(taskPage).find('#tblTasks tbody').empty();
 			storageEngine.findAll('task', function(tasks) {
+				console.log('this is tasks from the database' + tasks);
 				tasks.sort(function(o1, o2) {
 					//return Date.parse(o1.requiredBy).compareTo(Date.parse(o2.requiredBy));
 
