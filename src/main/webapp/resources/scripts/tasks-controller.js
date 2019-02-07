@@ -115,14 +115,15 @@ tasksController = function() {
                     loadTeamFromServer();
 					$(taskPage).find('#taskCreation').removeClass('not');
                     $('#creteUser').addClass('not');
-					$('#ManageTeam').addClass('not');
+					$('#teamManage').addClass('not');
 				});
 
 				$(taskPage).find('#btnAddTeam').click(function(evt) {
 					evt.preventDefault();
 					$(taskPage).find('#teamManage').removeClass('not');
 					$('#creteUser').addClass('not');
-					$('#tblUser').addClass('not');
+                    $('#taskCreation').addClass('not');
+
 				});
 
                 /**	 * 11/19/17kl        */

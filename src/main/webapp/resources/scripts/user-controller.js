@@ -14,7 +14,7 @@ $(function () {
         evt.preventDefault();
         $('#creteUser').removeClass('not');
         $('#taskCreation').addClass('not');
-        $('#ManageTeam').addClass('not');
+        $('#teamManage').addClass('not');
     });
 
     function getInputValues(parName) {
