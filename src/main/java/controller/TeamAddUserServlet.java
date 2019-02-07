@@ -21,7 +21,6 @@ public class TeamAddUserServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             //get request parameters
             int teamId = Integer.parseInt(request.getParameter("teamId"));
-           // int userId = Integer.parseInt(request.getParameter("userId"));
             HttpSession session= request.getSession();
             User user = (User) session.getAttribute("user");
             TeamService service = new TeamService();
