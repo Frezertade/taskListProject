@@ -10,6 +10,7 @@
 <script src="resources/scripts/jquery-serialization.js"></script>
 <script src="resources/scripts/tasks-controller.js"></script>
 <script src="resources/scripts/date.js"></script>
+	<script src="resources/scripts/teamManage.js"></script>
 <script src="resources/scripts/loadTable.js"></script>
 <script src="resources/scripts/user-controller.js"></script>
 </head>
@@ -120,6 +121,20 @@
 			<a href="#" id="btnRetrieveTasks">Retrieve tasks from server</a>
 		</nav>
 	</section>
+
+		<h1>Select Team from the drop dowm to join</h1>
+		<hr>
+		</p>
+
+		<select id="sel">
+			<option value="">-- Select --</option>
+		</select>
+		<body  onkeypress='myFunction(event)'>
+
+		<input type='hidden' id='homepage' value=$_SESSION[user]>
+
+		</body>
+		<p id="msg"></p>
 	</main>
 	<footer>You have <span id="taskCount"></span>tasks</footer>
 </body>
