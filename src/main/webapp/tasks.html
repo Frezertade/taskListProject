@@ -176,13 +176,14 @@
 
 </div>-->
 
-<script id="taskRow" type="text/x-jQuery-tmpl">
+&lt;!&ndash;<script id="taskRow" type="text/x-jQuery-tmpl">
 <tr>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${task}</td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}><time datetime="${requiredBy}">${requiredBy}</time></td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${category}</td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${priority.text()}</td>
-	<td {{if complete == true}}class="taskCompleted"{{/if}}>${team}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${team.text()}</td>
+
 	<td>
 		<nav>
 			{{if complete != true}}			
@@ -193,8 +194,8 @@
 		</nav>
 	</td>
 </tr>
-</script>
-<script id="userRow" type="text/x-jQuery-tmpl">
+</script>&ndash;&gt;
+&lt;!&ndash;<script id="userRow" type="text/x-jQuery-tmpl">
 <tr>
 	<td>${firstName}</td>
 	<td>${lastName}</td>
