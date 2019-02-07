@@ -35,6 +35,8 @@ $(function () {
         }
         );
     }
+
+
     function initScreen() {
         $(document).ready(function() {
             tasksController.init($('#taskPage'), function() {

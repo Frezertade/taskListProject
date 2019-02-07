@@ -71,6 +71,7 @@ tasksController = function() {
 				$(taskPage).find('#btnAddTask').click(function(evt) {
 					evt.preventDefault();
 					$(taskPage).find('#taskCreation').removeClass('not');
+                    $('#creteUser').addClass('not');
 				});
 
                 /**	 * 11/19/17kl        */

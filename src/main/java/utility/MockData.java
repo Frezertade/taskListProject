@@ -46,15 +46,15 @@ public class MockData {
     }
 
     public void addTask(){
-        taskService.save(new Task(100,"task 1","2017-11-11", Category.WORK, Priority.URGENT,userService.findByUserId(102),teamService.findById(100)));
+        taskService.save(new Task(100,"task 1","2017-11-11", Category.WORK, Priority.HIGH,userService.findByUserId(102),teamService.findById(100)));
         taskService.save(new Task(101,"task 2","2017-01-11", Category.WORK, Priority.LOW,userService.findByUserId(100),teamService.findById(100)));
         taskService.save(new Task(102,"task 3","2017-10-11", Category.PERSONAL, Priority.HIGH,userService.findByUserId(102),null));
-        taskService.save(new Task(103,"task 4","2017-05-11", Category.WORK, Priority.MIDUME,userService.findByUserId(101),teamService.findById(100)));
+        taskService.save(new Task(103,"task 4","2017-05-11", Category.WORK, Priority.MEDIUM,userService.findByUserId(101),teamService.findById(100)));
         taskService.save(new Task(104,"task 5","2017-07-11", Category.PERSONAL, Priority.HIGH,userService.findByUserId(101),null));
         taskService.save(new Task(105,"task 6","2017-08-11", Category.WORK, Priority.HIGH,userService.findByUserId(102),teamService.findById(101)));
         taskService.save(new Task(106,"task 7","2017-04-11", Category.WORK, Priority.LOW,userService.findByUserId(102),teamService.findById(100)));
         taskService.save(new Task(107,"task 8","2017-08-11", Category.WORK, Priority.HIGH,userService.findByUserId(101),teamService.findById(102)));
-        taskService.save(new Task(108,"task 9","2017-12-11", Category.PERSONAL, Priority.URGENT,userService.findByUserId(100),null));
+        taskService.save(new Task(108,"task 9","2017-12-11", Category.PERSONAL, Priority.MEDIUM,userService.findByUserId(100),null));
 }
 
 }
