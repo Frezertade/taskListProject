@@ -33,9 +33,9 @@
 					<div class="form-group">
 						<label>Priority</label>
 						<select name="priority" class="form-control">
-							<option value="2">High</option>
-							<option value="3">Medium</option>
-							<option value="4">Low</option>
+							<option value="High">High</option>
+							<option value="Medium">Medium</option>
+							<option value="Low">Low</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -178,14 +178,33 @@
 
 <script id="taskRow" type="text/x-jQuery-tmpl">
 <tr>
-	<td {{if complete == true}}class="taskCompleted"{{/if}}>${task}</td>
-	<td {{if complete == true}}class="taskCompleted"{{/if}}><time datetime="${requiredBy}">${requiredBy}</time></td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${teamName}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}><time datetime="${requiredBy}">${dueDate}</time></td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${category}</td>
-	<td {{if complete == true}}class="taskCompleted"{{/if}}>${priority.text()}</td>
-	<td {{if complete == true}}class="taskCompleted"{{/if}}>${team}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${priority}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${teamID}</td>
 	<td>
 		<nav>
 			{{if complete != true}}			
+				<a href="#" class="editRow" data-task-id="${id}">Edit</a>
+				<a href="#" class="completeRow" data-task-id="${id}">Complete</a>
+			{{/if}}
+			<a href="#" class="deleteRow" data-task-id="${id}">Delete</a>
+		</nav>
+	</td>
+</tr>
+
+</script>
+<script id="taskRow2" type="text/x-jQuery-tmpl">
+<tr>
+	<td {{if complete == true}}class="taskCompleted"{{/if}} >${task}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${dueDate}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${category}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${priority}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${teamName != null ? teamName : 'No team'}</td>
+	<td>
+		<nav>
+			{{if complete != true}}
 				<a href="#" class="editRow" data-task-id="${id}">Edit</a>
 				<a href="#" class="completeRow" data-task-id="${id}">Complete</a>
 			{{/if}}

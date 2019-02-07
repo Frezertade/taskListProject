@@ -1,10 +1,7 @@
 package business;
 
 import com.google.gson.Gson;
-import model.Task;
-import model.Team;
-import model.TeamMember;
-import model.User;
+import model.*;
 import util.Category;
 import util.DBName;
 import util.Priority;
@@ -26,8 +23,8 @@ public class TaskService {
     }
     // create a task object form the request
     public Task getTaskFromRequest(HttpServletRequest req, User user){
-        String name= req.getParameter("name");
-        String dueDate=req.getParameter("due");
+        String name= req.getParameter("task");
+        String dueDate=req.getParameter("requiredBy");
         String category=req.getParameter("category");
         String priority= req.getParameter("priority");
         String team=req.getParameter("team");
@@ -85,7 +82,18 @@ public class TaskService {
     }
     public void sendTaskList(HttpServletResponse resp,User user) throws IOException {
         List<Task> tasks = findByUserAndTeam(user);
-        String JSONTask= new Gson().toJson(tasks);
+        List<TaskViewModel> taskViewModels = tasks.stream().map(task -> {
+            return new TaskViewModel(task.getId(),
+                    task.getTask(),
+                    task.getDueDate(),
+                    task.getCategory(),
+                    task.getPriority(),
+                    task.getCreatedBy().getFirstName()+ " " +task.getCreatedBy().getLastName(),
+                    task.getCreatedBy().getUserID(),
+                    task.getTeam()!= null ? task.getTeam().getName():"",
+                    task.getTeam()!= null ? task.getTeam().getTeamId():0);
+        }).collect(Collectors.toList());
+        String JSONTask= new Gson().toJson(taskViewModels);
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

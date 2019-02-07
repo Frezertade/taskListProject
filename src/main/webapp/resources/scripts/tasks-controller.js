@@ -29,6 +29,13 @@ tasksController = function() {
         }).done(displayTasksServer.bind()); //need reference to the tasksController object
     }
 
+    function saveToServer(task){
+   $.ajax("tasks", {
+            "type": "post",
+             "data":task
+        }).done(displayTasksServer.bind());
+	}
+    retrieveTasksServer();
     /**
 	 * 111917kl
 	 * callback for retrieveTasksServer
@@ -116,25 +123,26 @@ tasksController = function() {
 					clearTask();
 				});
 				
-				$(taskPage).find('#tblTasks tbody').on('click', '.completeRow', function(evt) { 					
+				/*$(taskPage).find('#tblTasks tbody').on('click', '.completeRow', function(evt) {
 					storageEngine.findById('task', $(evt.target).data().taskId, function(task) {
 						task.complete = true;
 						storageEngine.save('task', task, function() {
 							tasksController.loadTasks();
 						},errorLogger);
 					}, errorLogger);
-				});
+				});*/
 				
 				$(taskPage).find('#saveTask').click(function(evt) {
 					evt.preventDefault();
 					if ($(taskPage).find('form').valid()) {
-						var task = $(taskPage).find('form').toObject();		
-						storageEngine.save('task', task, function() {
+						var task = $(taskPage).find('#taskForm').toObject();
+						saveToServer(task);
+						/*storageEngine.save('task', task, function() {
 							$(taskPage).find('#tblTasks tbody').empty();
 							tasksController.loadTasks();
 							clearTask();
 							$(taskPage).find('#taskCreation').addClass('not');
-						}, errorLogger);
+						}, errorLogger);*/
 					}
 				});
 				initialised = true;
@@ -145,17 +153,19 @@ tasksController = function() {
 		 * modification of the loadTasks method to load tasks retrieved from the server
          */
 		loadServerTasks: function(tasks) {
+			console.log("this is task from server"+tasks);
             $(taskPage).find('#tblTasks tbody').empty();
             $.each(tasks, function (index, task) {
                 if (!task.complete) {
                     task.complete = false;
                 }
-                $('#taskRow').tmpl(task).appendTo($(taskPage).find('#tblTasks tbody'));
+                console.log("this is task from the loop "+task);
+                $('#taskRow2').tmpl(task).appendTo($(taskPage).find('#tblTasks tbody'));
                 taskCountChanged();
                 console.log('about to render table with server tasks');
                 //renderTable(); --skip for now, this just sets style class for overdue tasks 111917kl
             });
-		},
+		}/*,
 		loadTasks : function() {
 			$(taskPage).find('#tblTasks tbody').empty();
 			storageEngine.findAll('task', function(tasks) {
@@ -165,10 +175,10 @@ tasksController = function() {
 					//I changed from sorting due date  to priority by sort to the new added
                     //  return ((o1.priority)>(o2.priority))? 1 :((o1.priority)<(o2.priority))? -1:0;
 
-					/*if(o1.priority>o2.priority) return 1;
+					/!*if(o1.priority>o2.priority) return 1;
 					else if(o1.priority<o2.priority) return -1;
 					else return Date.parse(o1.requiredBy).compareTo(Date.parse(o2.requiredBy));
-*/
+*!/
 
 				});
 				$.each(tasks, function(index, task) {
@@ -180,7 +190,7 @@ tasksController = function() {
 					renderTable();
 				});
 			}, errorLogger);
-		} 
+		} */
 	} 
 }();
 $(function (){
