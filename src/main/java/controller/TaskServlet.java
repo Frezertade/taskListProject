@@ -22,13 +22,6 @@ public class TaskServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-
-        String JSONtasks;
-        List<Task> taskList = new MockData().retrieveTaskList();
-        JSONtasks = new Gson().toJson(taskList);
-
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        out.write(JSONtasks);
+//write(JSONtasks);
     }
 }
