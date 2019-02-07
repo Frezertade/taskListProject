@@ -1,9 +1,5 @@
 
 
-
-
-
-
 tasksController = function() {
 	
 	function errorLogger(errorCode, errorMessage) {
@@ -214,7 +210,7 @@ $(function (){
                 x = rows[i].getElementsByTagName("TD")[3];
                 y = rows[i + 1].getElementsByTagName("TD")[3];
                 // Check if the two rows should switch place:
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                if (getIntegerValue(x.innerHTML) > getIntegerValue(y.innerHTML)) {
                     // If so, mark as a switch and break the loop:
                     shouldSwitch = true;
                     break;
@@ -228,6 +224,13 @@ $(function (){
             }
         }
 
+    }
+
+    function getIntegerValue(priority) {
+		priority=priority.toLowerCase();
+		if(priority === 'high') return 1;
+		else if(priority === 'medium') return 2;
+		else  return 3;
     }
 } )
 

@@ -31,27 +31,25 @@
 							   name="task" class="large form-control" placeholder="Breakfast at Tiffanys" maxlength="200"  />
 					</div>
 					<!-- The Priority ratings that is added to the task table  -->
-					<div class="form-group">
-						<label>Priority</label>
-						<select name="priority" class="form-control">
-							<option value="2">High</option>
-							<option value="3">Medium</option>
-							<option value="4">Low</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label>Required by</label> <input   type="date" required="required"
-															name="requiredBy" class="form-control" />
-					</div>
-					<div class="form-group">
-						<label>Category</label>
-						<select id="category" name="category" class="from-control">
-							<option value="select">Select Category</option>
-							<option value="Personal">Personal</option>
-							<option value="Work">Work</option>
-						</select>
-					</div>
-					<div class="form-group" id="teamDiv">
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select name="priority" class="form-control">
+                            <option value="2">High</option>
+                            <option value="3">Medium</option>
+                            <option value="4">Low</option>
+                        </select>
+
+                        <label>Required by</label> <input type="date" required="required"
+                                                          name="requiredBy" class="form-control"/>
+
+                        <label>Category</label>
+                        <select id="category" name="category" class="from-control">
+                            <option value="select">Select Category</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Work">Work</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="teamDiv">
 						<label>For Team</label>
 						<select name="team" id="team" class="form-control">
 
@@ -216,13 +214,14 @@
 
 </div>-->
 
-<script id="taskRow" type="text/x-jQuery-tmpl">
+&lt;!&ndash;<script id="taskRow" type="text/x-jQuery-tmpl">
 <tr>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${task}</td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}><time datetime="${requiredBy}">${requiredBy}</time></td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${category}</td>
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${priority.text()}</td>
-	<td {{if complete == true}}class="taskCompleted"{{/if}}>${team}</td>
+	<td {{if complete == true}}class="taskCompleted"{{/if}}>${team.text()}</td>
+
 	<td>
 		<nav>
 			{{if complete != true}}			
@@ -233,8 +232,8 @@
 		</nav>
 	</td>
 </tr>
-</script>
-<script id="userRow" type="text/x-jQuery-tmpl">
+</script>&ndash;&gt;
+&lt;!&ndash;<script id="userRow" type="text/x-jQuery-tmpl">
 <tr>
 	<td>${firstName}</td>
 	<td>${lastName}</td>
