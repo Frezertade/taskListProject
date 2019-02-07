@@ -28,7 +28,29 @@ tasksController = function() {
             // }
         }).done(displayTasksServer.bind()); //need reference to the tasksController object
     }
+    function loadTeamFromServer(){
+        $.ajax("teams",{
+            "type":"get",
+            dataType: "json"
+        }).done(loadTeam);
+	}
 
+    const category= $('#category');
+    category.change(function () {
+        const team= $('#teamDiv');
+        if(category.val() === "Personal") team.css('display','none');
+        else team.css('display','block');
+    });
+    function loadTeam(teams) {
+        const forTeam=$('#team');
+        forTeam.empty();
+        console.log(teams);
+        forTeam.append($('<option>',{'value':'select','text':'Select Team'}));
+        $.each(teams, function(idx,team){
+                forTeam.append($('<option>',{ "value":+teams[idx].teamId, 'text':teams[idx].name}))
+            }
+        );
+    }
     function retrieveAllUserTasksServer() {
         $.ajax("allTasks", {
             "type": "get",
@@ -94,6 +116,7 @@ tasksController = function() {
 				
 				$(taskPage).find('#btnAddTask').click(function(evt) {
 					evt.preventDefault();
+                    loadTeamFromServer();
 					$(taskPage).find('#taskCreation').removeClass('not');
                     $('#creteUser').addClass('not');
 				});

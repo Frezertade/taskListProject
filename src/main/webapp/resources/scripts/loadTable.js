@@ -1,5 +1,5 @@
 $(function () {
-    $("#taskRow").html("<tr>\n" +
+    /*$("#taskRow").html("<tr>\n" +
         "\t<td {{if complete == true}}class=\"taskCompleted\"{{/if}}>${task}</td>\n" +
         "\t<td {{if complete == true}}class=\"taskCompleted\"{{/if}}><time datetime=\"${requiredBy}\">${requiredBy}</time></td>\n" +
         "\t<td {{if complete == true}}class=\"taskCompleted\"{{/if}}>${category}</td>\n" +
@@ -13,28 +13,9 @@ $(function () {
         "\t\t\t<a href=\"#\" class=\"deleteRow\" data-task-id=\"${id}\">Delete</a>\n" +
         "\t\t</nav>\n" +
         "\t</td>\n" +
-    "</tr>");
+    "</tr>");*/
 
-    $.ajax("teams",{
-       "type":"get",
-       dataType: "json"
-    }).done(loadTeam);
-    const category= $('#category');
-    category.change(function () {
-        const team= $('#teamDiv');
-       if(category.val() === "Personal") team.css('display','none');
-       else team.css('display','block');
-    });
-    function loadTeam(teams) {
-        const forTeam=$('#team');
-        forTeam.empty();
-        console.log(teams);
-        forTeam.append($('<option>',{'value':'select','text':'Select Team'}));
-        $.each(teams, function(idx,team){
-            forTeam.append($('<option>',{ "value":+teams[idx].teamId, 'text':teams[idx].name}))
-        }
-        );
-    }
+
 
 
     function initScreen() {
