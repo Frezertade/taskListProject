@@ -78,6 +78,14 @@ tasksController = function() {
 					evt.preventDefault();
 					$(taskPage).find('#taskCreation').removeClass('not');
                     $('#creteUser').addClass('not');
+					$('#ManageTeam').addClass('not');
+				});
+
+				$(taskPage).find('#btnAddTeam').click(function(evt) {
+					evt.preventDefault();
+					$(taskPage).find('#teamManage').removeClass('not');
+					$('#creteUser').addClass('not');
+					$('#tblUser').addClass('not');
 				});
 
                 /**	 * 11/19/17kl        */
@@ -85,6 +93,7 @@ tasksController = function() {
                     evt.preventDefault();
                     console.log('making ajax call');
                     retrieveTasksServer();
+					$('#creteUser').addClass('not');
                 });
 
 				$(taskPage).find('#tblTasks tbody').on('click', 'tr', function(evt) {

@@ -1,11 +1,8 @@
-//
-$(document).ready(function () {
-    fetchTeamData();
-});
 
 //Build the drop down table of teams by getting data from the Teams from back end
 function fetchTeamData() {
-    function displayUser(data) {
+    function displayTeamData(data) {
+        $('#sel').empty();
         let each;
         each = $.each(data, function (index, value) {
             // APPEND OR INSERT DATA TO SELECT ELEMENT.
@@ -15,36 +12,53 @@ function fetchTeamData() {
         return each;
     }
 
-    $.ajax("http://localhost:8080/task/teams", {
+    $.ajax("teams", {
         "type": "get",
         dataType:"json"
-    }).done(displayUser);
+    }).done(displayTeamData);
 
     $('#sel').change(function () {
        // add user to the selected team !
         $.ajax(
-            "http://localhost:8080/task/addUserTeam", {
+            "addUserTeam", {
                 "type": "post",
                 "data": {
                     "teamId":this.options[this.selectedIndex].value
                 }
             }
-        // ).done($('#msg').text('You are aded to ' + this.options[this.selectedIndex].text));
         ).done($('#msg').text('You are aded to ' + this.options[this.selectedIndex].text));
     });
 }
 
 $(function() {
-    $("#CreatTeam").click(updateGuests);
+
+    $.ajax("teams", {
+        "type": "get",
+        dataType: "json"
+
+    }).done(loadTeam);
+    function loadTeam(teams) {
+        fetchTeamData();
+        const tableTeam = $('#tblTeam tbody');
+        tableTeam.empty();
+        $.each(teams, function (idx, team) {
+            $("#teamRow").tmpl(team).appendTo(tableTeam);
+        });
+    }
+    $("#creatTeam").click(function (){
+        console.log("this is click");
+        let teamName = $('input[name=teamName]').val();
+        console.log('this is team name '+ teamName);
+        $.ajax("createTeam", {
+            "type": "post",
+            "data": {
+                "teamName": teamName,
+            }
+        }).done(loadTeam);
+    });
 });
 
-function updateGuests() {
-    let teamName = $("#teamName").val();
-    $.ajax("creatTeam", {
-        "type": "post",
-        "data": {
-            "teamName": teamName,
-        }
-    }).done(tasksController.loadServerTasks(data));
-}
+
+
+
 
