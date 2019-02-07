@@ -17,7 +17,7 @@ function fetchTeamData() {
 
     $.ajax("http://localhost:8080/task/teams", {
         "type": "get",
-        "data": {}
+        dataType:"json"
     }).done(displayUser);
 
     $('#sel').change(function () {
