@@ -78,6 +78,11 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
+    public List<Task> findByTeam(Team team){
+        return findAll().stream()
+                .filter(task -> task.getTeam().getTeamId() == team.getTeamId())
+                .collect(Collectors.toList());
+    }
     public void sendTaskList(HttpServletResponse resp,User user) throws IOException {
         List<Task> tasks = findByUserAndTeam(user);
         String JSONTask= new Gson().toJson(tasks);
