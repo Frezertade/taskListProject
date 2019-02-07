@@ -40,6 +40,7 @@ public class UserService {
     }
 
     public void save(User user){
+        user.setPassword(generatePassword(user));
         database.setValue(DBName.USER,user);
     }
 
@@ -74,5 +75,9 @@ public class UserService {
                 .filter(user1 -> user1.getUserID()== userid)
                 .findAny();
         return user.orElse(null);
+    }
+    private String generatePassword(User user){
+        return user.getFirstName().charAt(0)+user.getLastName();
+
     }
 }
