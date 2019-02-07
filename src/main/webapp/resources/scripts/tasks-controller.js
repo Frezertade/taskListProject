@@ -1,4 +1,10 @@
-tasksController = function() { 
+
+
+
+
+
+
+tasksController = function() {
 	
 	function errorLogger(errorCode, errorMessage) {
 		console.log(errorCode +':'+ errorMessage);
@@ -71,6 +77,7 @@ tasksController = function() {
 				$(taskPage).find('#btnAddTask').click(function(evt) {
 					evt.preventDefault();
 					$(taskPage).find('#taskCreation').removeClass('not');
+                    $('#creteUser').addClass('not');
 				});
 
                 /**	 * 11/19/17kl        */
@@ -79,7 +86,7 @@ tasksController = function() {
                     console.log('making ajax call');
                     retrieveTasksServer();
                 });
-				
+
 				$(taskPage).find('#tblTasks tbody').on('click', 'tr', function(evt) {
 					$(evt.target).closest('td').siblings().andSelf().toggleClass('rowHighlight');
 				});	
@@ -154,13 +161,14 @@ tasksController = function() {
 			storageEngine.findAll('task', function(tasks) {
 				console.log('this is tasks from the database' + tasks);
 				tasks.sort(function(o1, o2) {
-					//return Date.parse(o1.requiredBy).compareTo(Date.parse(o2.requiredBy));
-
+					return Date.parse(o1.requiredBy).compareTo(Date.parse(o2.requiredBy));
 					//I changed from sorting due date  to priority by sort to the new added
-					if(o1.priority>o2.priority) return 1;
+                    //  return ((o1.priority)>(o2.priority))? 1 :((o1.priority)<(o2.priority))? -1:0;
+
+					/*if(o1.priority>o2.priority) return 1;
 					else if(o1.priority<o2.priority) return -1;
-					else return 0;
-                  //  return ((o1.priority)>(o2.priority))? 1 :((o1.priority)<(o2.priority))? -1:0;
+					else return Date.parse(o1.requiredBy).compareTo(Date.parse(o2.requiredBy));
+*/
 
 				});
 				$.each(tasks, function(index, task) {
@@ -175,3 +183,43 @@ tasksController = function() {
 		} 
 	} 
 }();
+$(function (){
+    $('#sortByPriority').click(sortTable);
+    function sortTable() {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("tblTasks");
+        switching = true;
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /* Loop through all table rows (except the
+            first, which contains table headers): */
+            for (i = 1; i < (rows.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                x = rows[i].getElementsByTagName("TD")[3];
+                y = rows[i + 1].getElementsByTagName("TD")[3];
+                // Check if the two rows should switch place:
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+
+    }
+} )
+
+

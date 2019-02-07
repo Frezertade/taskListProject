@@ -7,6 +7,5 @@
 *.iml
 out
 gen
-target
+/target
 *.war
-/.idea/workspace.xml
