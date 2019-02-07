@@ -29,6 +29,22 @@ function fetchTeamData() {
                     "teamId":this.options[this.selectedIndex].value
                 }
             }
+        // ).done($('#msg').text('You are aded to ' + this.options[this.selectedIndex].text));
         ).done($('#msg').text('You are aded to ' + this.options[this.selectedIndex].text));
     });
 }
+
+$(function() {
+    $("#CreatTeam").click(updateGuests);
+});
+
+function updateGuests() {
+    let teamName = $("#teamName").val();
+    $.ajax("creatTeam", {
+        "type": "post",
+        "data": {
+            "teamName": teamName,
+        }
+    }).done(tasksController.loadServerTasks(data));
+}
+
