@@ -1,5 +1,6 @@
 package controller;
 
+import business.TaskService;
 import com.google.gson.Gson;
 import model.Task;
 import utility.MockData;
@@ -14,14 +15,14 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/TaskServlet")
+@WebServlet("/allTasks")
 public class TaskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-//write(JSONtasks);
+        TaskService taskService= new TaskService();
+        taskService.sendTaskList(response,taskService.findAll());
     }
 }

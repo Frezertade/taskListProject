@@ -80,8 +80,8 @@ public class TaskService {
                 .filter(task -> task.getTeam().getTeamId() == team.getTeamId())
                 .collect(Collectors.toList());
     }
-    public void sendTaskList(HttpServletResponse resp,User user) throws IOException {
-        List<Task> tasks = findByUserAndTeam(user);
+
+    public void sendTaskList(HttpServletResponse resp,List<Task> tasks) throws IOException {
         List<TaskViewModel> taskViewModels = tasks.stream().map(task -> {
             return new TaskViewModel(task.getId(),
                     task.getTask(),

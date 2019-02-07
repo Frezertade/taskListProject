@@ -22,7 +22,7 @@ public class TaskController extends HttpServlet {
 
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
-        taskService.sendTaskList(resp,user);
+        taskService.sendTaskList(resp,taskService.findByUserAndTeam(user));
     }
 
     @Override
@@ -31,6 +31,6 @@ public class TaskController extends HttpServlet {
         User user= (User) session.getAttribute("user");
         Task task = taskService.getTaskFromRequest(req,user);
         taskService.save(task);
-        taskService.sendTaskList(resp,user);
+        taskService.sendTaskList(resp,taskService.findByUserAndTeam(user));
     }
 }

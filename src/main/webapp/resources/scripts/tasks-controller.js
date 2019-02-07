@@ -29,6 +29,17 @@ tasksController = function() {
         }).done(displayTasksServer.bind()); //need reference to the tasksController object
     }
 
+    function retrieveAllUserTasksServer() {
+        $.ajax("allTasks", {
+            "type": "get",
+            dataType: "json"
+            // "data": {
+            //     "first": first,
+            //     "last": last
+            // }
+        }).done(displayTasksServer.bind()); //need reference to the tasksController object
+    }
+
     function saveToServer(task){
    $.ajax("tasks", {
             "type": "post",
@@ -91,7 +102,7 @@ tasksController = function() {
                 $(taskPage).find('#btnRetrieveTasks').click(function(evt) {
                     evt.preventDefault();
                     console.log('making ajax call');
-                    retrieveTasksServer();
+                    retrieveAllUserTasksServer();
                 });
 
 				$(taskPage).find('#tblTasks tbody').on('click', 'tr', function(evt) {
