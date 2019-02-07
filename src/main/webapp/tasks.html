@@ -123,6 +123,56 @@
 
 
 	</section>
+	<section id="teamManage" class="not">
+			<div class="row">
+
+
+
+			<div class="col-md-4">
+					<form id="Form" >
+						<input type="hidden" name="userID">
+						<div class="form-group" >
+							<label>Team Name</label>
+							<input type="text" id="teamName" name="teamName" class="form-control" placeholder="Coders" required="required"  >
+						</div>
+						<div class="form-group">
+							<nav>
+								<a href="#" id="creatTeam">Creat Team</a>    <!-- https://stackoverflow.com/questions/4855168/what-is-href-and-why-is-it-used -->
+								<a href="#" id="clear">Clear</a>
+							</nav>
+						</div>
+
+
+					</form>
+				</div>
+
+			<div class="col-md-4">
+					<table id="tblTeam">
+						<colgroup>
+							<col width="20%">
+						</colgroup>
+						<thead>
+						<tr>
+							<th>Team Name</th>
+
+						</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-4">
+					<h3>Select Team from the drop down to join</h3>
+					<hr>
+					</p>
+
+					<select id="sel">
+						<option value="">-- Select --</option>
+					</select>
+					<p id="msg"></p>
+				</div>
+			</div>
+		</section>
 	<section>
 		<table id="tblTasks">
 			<colgroup>
@@ -150,25 +200,14 @@
 		<nav>
 			<a href="#" id="btnAddTask">Add task</a>
 			<a href="#" id="btnAddUser">Add User</a>
+			<a href="#" id="btnAddTeam">Add Team</a>
 			<a href="#" id="btnRetrieveTasks">Retrieve tasks from server</a>
 			<a href="#" id="sortByPriority">Sorting by priority</a>
+
 			<!--<button type="submit" id="bypriority">SortbyPriority</button>-->
 		</nav>
 	</section>
 
-		<h1>Select Team from the drop dowm to join</h1>
-		<hr>
-		</p>
-
-		<select id="sel">
-			<option value="">-- Select --</option>
-		</select>
-		<body  onkeypress='myFunction(event)'>
-
-		<input type='hidden' id='homepage' value=$_SESSION[user]>
-
-		</body>
-		<p id="msg"></p>
 	</main>
 	<footer>You have <span id="taskCount"></span>tasks</footer>
 </body>
@@ -185,7 +224,7 @@
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${teamID}</td>
 	<td>
 		<nav>
-			{{if complete != true}}			
+			{{if complete != true}}
 				<a href="#" class="editRow" data-task-id="${id}">Edit</a>
 				<a href="#" class="completeRow" data-task-id="${id}">Complete</a>
 			{{/if}}
@@ -204,7 +243,7 @@
 	<td {{if complete == true}}class="taskCompleted"{{/if}}>${teamName != null ? teamName : 'No team'}</td>
 	<td>
 		<nav>
-			{{if complete != true}}
+			{{if complete != true}}			
 				<a href="#" class="editRow" data-task-id="${id}">Edit</a>
 				<a href="#" class="completeRow" data-task-id="${id}">Complete</a>
 			{{/if}}
@@ -220,6 +259,12 @@
 	<td>${email}</td>
 	<td>${phone}</td>
 	<td>${location}</td>
+</tr>
+</script>
+
+<script id="teamRow" type="text/x-jQuery-tmpl">
+<tr>
+	<td>${name}</td>
 </tr>
 </script>
 

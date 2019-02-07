@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class TaskService {
     Database<Task> database;
 
+
     public TaskService(){
         database= Database.getInstance();
     }

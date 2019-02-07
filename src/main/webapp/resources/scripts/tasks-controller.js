@@ -1,9 +1,5 @@
 
 
-
-
-
-
 tasksController = function() {
 	
 	function errorLogger(errorCode, errorMessage) {
@@ -119,6 +115,14 @@ tasksController = function() {
                     loadTeamFromServer();
 					$(taskPage).find('#taskCreation').removeClass('not');
                     $('#creteUser').addClass('not');
+					$('#ManageTeam').addClass('not');
+				});
+
+				$(taskPage).find('#btnAddTeam').click(function(evt) {
+					evt.preventDefault();
+					$(taskPage).find('#teamManage').removeClass('not');
+					$('#creteUser').addClass('not');
+					$('#tblUser').addClass('not');
 				});
 
                 /**	 * 11/19/17kl        */
@@ -126,6 +130,7 @@ tasksController = function() {
                     evt.preventDefault();
                     console.log('making ajax call');
                     retrieveAllUserTasksServer();
+					$('#creteUser').addClass('not');
                 });
 
 				$(taskPage).find('#tblTasks tbody').on('click', 'tr', function(evt) {
@@ -249,7 +254,7 @@ $(function (){
                 x = rows[i].getElementsByTagName("TD")[3];
                 y = rows[i + 1].getElementsByTagName("TD")[3];
                 // Check if the two rows should switch place:
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                if (getIntegerValue(x.innerHTML) > getIntegerValue(y.innerHTML)) {
                     // If so, mark as a switch and break the loop:
                     shouldSwitch = true;
                     break;
@@ -263,6 +268,13 @@ $(function (){
             }
         }
 
+    }
+
+    function getIntegerValue(priority) {
+		priority=priority.toLowerCase();
+		if(priority === 'high') return 1;
+		else if(priority === 'medium') return 2;
+		else  return 3;
     }
 } )
 

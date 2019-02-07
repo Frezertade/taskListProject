@@ -7,6 +7,7 @@ import util.DBName;
 import utility.Database;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 public class TeamService {
 
@@ -17,6 +18,8 @@ public class TeamService {
     List<Team> teamList = dbTeam.getValue(DBName.TEAM);
     List<User> users = dbUser.getValue(DBName.USER);
 
+    //random number for id
+
 
     // FINDS TEAM BY ID
     public Team findById(int teamId) {
@@ -24,16 +27,14 @@ public class TeamService {
         return team.orElse(null);
     }
 
-//ADDS USER TO TEAM
+    //ADDS USER TO TEAM
     public String addUserToTeam(int userId, int teamId) {
         String response;
         //if both user and Team parameters are found add them in to database
-        dbUser.setValue(DBName.USER, new User(3, "FREZER", "TADESSE", "FREE@mum.edu", "432-234-2345", "fairfield,iowa,52557", "password"));
-        dbTeam.setValue(DBName.TEAM, new Team(1, "PROFESSIONALS", users.get(0)));
         Optional<User> foundUser = users.stream().filter(user1 -> user1.getUserID() == userId).findAny();
         Optional<Team> foundTeam = teamList.stream().filter(team1 -> team1.getTeamId() == teamId).findAny();
         if (foundUser.isPresent() && foundTeam.isPresent()) {
-            dbTeamMember.setValue(DBName.TEAM_MEMBER, new TeamMember(foundTeam.get(),foundUser.get()));
+            dbTeamMember.setValue(DBName.TEAM_MEMBER, new TeamMember(foundTeam.get(), foundUser.get()));
             //response sucess
             response = foundTeam.get().getName() + foundUser.get().getFirstName();
         } else {
@@ -58,7 +59,17 @@ public class TeamService {
         }
     }
 
+    //CREATS TEAM for overload
+    public void creatTeam(String name, User user) {
+        dbTeam.setValue(DBName.TEAM, new Team(getRandomId(), name, user));
+    }
 
+
+    public int getRandomId() {
+        Random random = new Random();
+        return random.nextInt(1000);
+    }
+}
     //RETURNS LIST OF USERS FROM TEAMMEMBERS DATABSE
 
 //    public List<User> getTeamUsers(int teamId){
@@ -69,6 +80,6 @@ public class TeamService {
 
 
 
-}
+
 
 
